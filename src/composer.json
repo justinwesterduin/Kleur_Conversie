@@ -1,0 +1,15 @@
+{
+    "name": "justin.westerduin/kleur_conversie",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./app"
+        }
+    },
+    "authors": [
+        {
+            "name": "justinwesterduin",
+            "email": "justin.westerduin@maxserv.com"
+        }
+    ],
+    "require": {}
+}
