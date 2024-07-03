@@ -1,2 +1,2 @@
-# Kleur_Conversie
-Extra opdracht: convert rgb to hex
+# Kleur Conversie
+Extra PHP opdracht: convert rgb to hex
