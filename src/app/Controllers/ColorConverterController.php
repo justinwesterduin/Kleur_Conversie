@@ -1,40 +1,52 @@
 <?php
 
-namespace App;
+namespace App\Controllers;
 
-class ColorConverterController
+use Core\Controller;
+use App\Models\Color;
+
+class ColorConverterController extends Controller
 {
-    public function inputCheck(): void
+    private Color $color;
+
+    public function __construct()
+    {
+        $this->color = new Color();
+    }
+
+    public function inputCheck(): array
     {
         if (isset($_GET['convert'])) {
+            $red = $this->color->getColor('red');
+            $green = $this->color->getColor('green');
+            $blue = $this->color->getColor('blue');
 
-            $red = $this->getColor(color: 'red');
-            $green = $this->getColor(color: 'green');
-            $blue = $this->getColor(color: 'blue');
-
-            if (empty($_GET['rgb'] | $red | $green | $blue)) {
-                header(header: 'index.php');
+            if (empty($_GET['rgb']) || empty($red) || empty($green) || empty($blue)) {
+                header('Location: /');
+                exit;
             }
 
-            if ($red > 255 | $green > 255 | $blue > 255) {
-                header(header: 'index.php');
+            if ($red > 255 || $green > 255 || $blue > 255) {
+                header('Location: /');
+                exit;
             }
+            return ['red' => $red, 'green' => $green, 'blue' => $blue];
         }
+        return ['red' => '', 'green' => '', 'blue' => ''];
     }
 
-    private function getColor($color): string
+    public function rgbToHex(array $colors): string
     {
-        if (isset($_GET[$color])) {
-            return (string)(int)$_GET[$color];
-        }
-        return '0';
-    }
-
-    public function rgbToHex(): string
-    {
-        $red = $this->getColor(color: 'red');
-        $green = $this->getColor(color: 'green');
-        $blue = $this->getColor(color: 'blue');
+        $red = $colors['red'];
+        $green = $colors['green'];
+        $blue = $colors['blue'];
         return sprintf("#%02x%02x%02x", $red, $green, $blue);
+    }
+
+    public function index(): void
+    {
+        $colors = $this->inputCheck();
+        $hex = $this->rgbToHex($colors);
+        $this->view('Index', ['hex' => $hex]);
     }
 }
