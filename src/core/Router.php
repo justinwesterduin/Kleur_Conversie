@@ -2,26 +2,41 @@
 
 namespace Core;
 
-namespace Core;
-
 class Router
 {
-    private $routes = [];
+    protected array $routes = [];
 
-    public function add($route, $callback): void
+    public function addRoute($route, $controller, $action, $method): void
     {
-        $this->routes[$route] = $callback;
+        $this->routes[$method][$route] = ['controller' => $controller, 'action' => $action];
     }
 
-    public function dispatch()
+    public function get($route, $controller, $action): void
     {
-        $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-        foreach ($this->routes as $route => $callback) {
-            if ($uri === $route) {
-                return call_user_func($callback);
-            }
+        $this->addRoute($route, $controller, $action, "GET");
+    }
+
+    public function post($route, $controller, $action): void
+    {
+        $this->addRoute($route, $controller, $action, "POST");
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function dispatch(): void
+    {
+        $uri = strtok($_SERVER['REQUEST_URI'], '?');
+        $method =  $_SERVER['REQUEST_METHOD'];
+
+        if (array_key_exists($uri, $this->routes[$method])) {
+            $controller = $this->routes[$method][$uri]['controller'];
+            $action = $this->routes[$method][$uri]['action'];
+
+            $controller = new $controller();
+            $controller->$action();
+        } else {
+            throw new \Exception("No route found for URI: $uri");
         }
-        http_response_code(404);
-        echo "404 Not Found";
     }
 }
