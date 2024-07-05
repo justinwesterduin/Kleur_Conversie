@@ -2,14 +2,14 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link href="../output.css" rel="stylesheet">
+        <link href="../../public/css/output.css" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
         <title>Title</title>
     </head>
     <body>
         <div class="bg-white py-6 sm:py-8 lg:py-12">
             <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">Login</h2>
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">Convert</h2>
 
                 <form class="mx-auto max-w-lg rounded-lg border" action="/" method="get">
                     <div class="flex flex-col gap-4 p-4 md:p-8">
@@ -71,17 +71,6 @@
                                 class="block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base">
                             Convert
                         </button>
-
-                        <div class="relative flex items-center justify-center">
-                            <span class="absolute inset-x-0 h-px bg-gray-300"></span>
-                            <span class="relative bg-white px-4 text-sm text-gray-400">Log in with social</span>
-                        </div>
-
-                        <div class="flex items-center justify-center bg-gray-100 p-4">
-                            <p class="text-center text-sm text-gray-500">Don't have an account? <a href="#"
-                                                                                                   class="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">Register</a>
-                            </p>
-                        </div>
                     </div>
                 </form>
             </div>
