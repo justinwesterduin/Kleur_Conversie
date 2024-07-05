@@ -2,7 +2,8 @@
     "name": "justin.westerduin/kleur_conversie",
     "autoload": {
         "psr-4": {
-            "App\\": "./app"
+            "App\\": "app/",
+            "Core\\": "core/"
         }
     },
     "authors": [
