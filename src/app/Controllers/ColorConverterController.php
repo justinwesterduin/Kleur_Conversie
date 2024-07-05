@@ -6,17 +6,17 @@ class ColorConverterController
 {
     public function inputCheck(): void
     {
-        if (isset($_GET[ 'convert' ])) {
+        if (isset($_GET['convert'])) {
 
             $red = $this->getColor(color: 'red');
             $green = $this->getColor(color: 'green');
             $blue = $this->getColor(color: 'blue');
 
-            if (empty($_GET[ 'rgb' ] | $red | $green| $blue)) {
+            if (empty($_GET['rgb'] | $red | $green | $blue)) {
                 header(header: 'index.php');
             }
 
-            if($red > 255 | $green > 255 | $blue > 255) {
+            if ($red > 255 | $green > 255 | $blue > 255) {
                 header(header: 'index.php');
             }
         }
@@ -24,7 +24,7 @@ class ColorConverterController
 
     private function getColor($color): string
     {
-        if(isset($_GET[$color])) {
+        if (isset($_GET[$color])) {
             return (string)(int)$_GET[$color];
         }
         return '0';
